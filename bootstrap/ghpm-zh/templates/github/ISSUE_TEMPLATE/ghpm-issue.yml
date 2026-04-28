@@ -1,0 +1,45 @@
+name: GHPM Issue
+description: 创建一个进入 GHPM 初筛流程的 issue
+title: "[Issue] "
+labels:
+  - status/needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请尽量描述清楚问题或想法。创建后该 issue 会先进入 GHPM 初筛流程。
+  - type: textarea
+    id: background
+    attributes:
+      label: 背景
+      description: 这个问题或需求来自哪里？
+    validations:
+      required: false
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题或目标
+      description: 需要解决什么问题，或希望达成什么目标？
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+      description: 你希望最终表现是什么？
+    validations:
+      required: false
+  - type: textarea
+    id: details
+    attributes:
+      label: 细节和上下文
+      description: 相关链接、截图、日志、复现步骤或补充说明。
+    validations:
+      required: false
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 验收想法
+      description: 如果你已经知道如何验证完成，请写在这里。
+    validations:
+      required: false

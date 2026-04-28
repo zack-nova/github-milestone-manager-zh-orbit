@@ -1,0 +1,4 @@
+interface:
+  display_name: "提交 PR"
+  short_description: "扫描完成开发的 issue 并创建 PR"
+  default_prompt: "使用 $submit-pr 扫描所有 git worktrees，并为 status/development-complete 的 issue 创建对应分支 PR。"

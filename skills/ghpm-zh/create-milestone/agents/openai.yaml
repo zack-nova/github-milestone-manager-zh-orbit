@@ -1,0 +1,4 @@
+interface:
+  display_name: "创建 Milestone"
+  short_description: "创建 GHPM milestone hub 与归属标签"
+  default_prompt: "使用 $create-milestone 创建 GHPM milestone、Milestone Hub Issue、技术债记录 issue 和 milestone/<slug> 标签。"

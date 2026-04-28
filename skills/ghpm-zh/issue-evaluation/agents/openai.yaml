@@ -1,0 +1,4 @@
+interface:
+  display_name: "Issue 研判"
+  short_description: "澄清 GitHub issue 的需求与技术方案"
+  default_prompt: "使用 $issue-evaluation 研判指定 GitHub issue，补全需求、技术方案和验收标准。"

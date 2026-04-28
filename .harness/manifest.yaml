@@ -1,0 +1,7 @@
+schema_version: 1
+kind: source
+source:
+    package:
+        type: orbit
+        name: ghpm-zh
+    source_branch: main

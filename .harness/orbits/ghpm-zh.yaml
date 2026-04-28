@@ -1,0 +1,91 @@
+package:
+    type: orbit
+    name: ghpm-zh
+name: GHPM GitHub Milestone Manager
+description: 基于 gh-issue-sync 的 GitHub issue 与 milestone 管理流程
+meta:
+    file: .harness/orbits/ghpm-zh.yaml
+    agents_template: |
+        # GHPM Orbit
+
+        用于通过 `gh-issue-sync` 管理 GitHub issue、milestone、开发准备和 PR 提交。
+
+        先读所需子文档：长期规则在 `docs/ghpm/`。
+
+        相关 skill：`$create-issue`、`$issue-triage`、`$issue-evaluation`、`$create-milestone`、`$prepare-development`、`$submit-pr`。
+
+        硬规则：每个 issue 只保留一个 `status/*`；不要提交 `.issues/` 或 `.ghpm.json`；批量 GitHub、worktree、PR 修改前先 dry-run。
+    humans_template: |
+        # GHPM Orbit 使用说明
+
+        这个 orbit 帮助开发者把 GitHub issue 从“想法”推进到 milestone 计划、开发准备和 PR 提交。开发者负责判断、确认和授权；skill 负责按固定流程读文件、生成草案、同步状态和执行明确批准的写操作。
+
+        ```
+
+        ## 工作流程
+
+        1. 收集新需求或缺陷：用 `$create-issue` 创建普通 issue 或 issue 草稿。创建后停下，不直接规划 milestone。
+        2. 整理待处理 issues：用 `$issue-triage` 初筛、分类、识别 blocker，并决定下一步是进入 milestone、继续讨论，还是拆分。
+        3. 澄清或拆分 issue：用 `$issue-evaluation` 补全需求、技术方案、验收标准，或把过大的 issue 拆成可执行子 issue。
+        4. 规划 milestone：用 `$create-milestone` 把 `status/ready-for-milestone` 的 issues 分组，创建 Milestone Hub Issue、技术债记录 issue、依赖关系、批次和开发顺序。
+        5. 准备开发上下文：用 `$prepare-development` 为整个 milestone 创建或复用 worktree，同步 `.issues/`，更新 `.ghpm.json`，输出开发交接摘要。
+        6. 开发由人或其他开发 agent 完成。GHPM 不写业务代码、不 review、不 merge。开发完成后，把对应 issue 更新为 `status/development-complete`。
+        7. 提交 PR：用 `$submit-pr` 扫描所有 worktree，为已完成且已提交代码的 issue 创建 PR，并把 issue 推进到 `status/submitted`。
+
+        ## 开发者确认点
+
+        读取、分析和生成建议可以直接让 skill 做。批量改 labels、改 issue body、创建 milestone、切换 worktree、修改 `.ghpm.json`、push issue、创建 PR 前，先看 dry-run 或计划；确认无误后再明确说“执行”“应用”“创建”或“提交”。
+    bootstrap_template: |
+        初始化说明见 `bootstrap/ghpm-zh/initialization.md`。
+
+        GitHub issue 和 PR 模板在 `bootstrap/ghpm-zh/templates/github/`。
+
+        不要直接覆盖已有 `.github` 模板；先展示 diff 或合并计划。`.issues/` 和 `.ghpm.json` 进入 `.gitignore`。
+    include_in_projection: true
+    include_in_write: true
+    include_in_export: true
+    include_description_in_orchestration: true
+capabilities:
+    commands:
+        paths:
+            include:
+                - commands/ghpm-zh/**/*.md
+    skills:
+        local:
+            paths:
+                include:
+                    - skills/ghpm-zh/*
+content:
+    - name: ghpm-zh-bootstrap
+      description: GHPM仓库初始化材料
+      role: rule
+      paths:
+        include:
+            - bootstrap/ghpm-zh/**
+      lane: bootstrap
+    - name: ghpm-zh-guides
+      description: GHPM长期操作说明
+      role: rule
+      paths:
+        include:
+            - docs/ghpm/**
+behavior:
+    scope:
+        projection_roles:
+            - meta
+            - subject
+            - rule
+            - process
+        write_roles:
+            - meta
+            - rule
+        export_roles:
+            - meta
+            - rule
+        orchestration_roles:
+            - meta
+            - rule
+            - process
+    orchestration:
+        include_orbit_description: true
+        materialize_agents_from_meta: true
