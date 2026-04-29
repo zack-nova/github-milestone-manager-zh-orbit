@@ -4,8 +4,8 @@ template:
     orbit_id: ghpm-zh
     default_template: false
     created_from_branch: main
-    created_from_commit: 52caaa4053ab9dc3b000f73fa5ae9504d28aa388
-    created_at: 2026-04-29T00:29:31Z
+    created_from_commit: a41ab9b14033a7efbe08e96f5729f4c20827cc4d
+    created_at: 2026-04-29T03:56:35Z
 variables:
     PR_BODY_FILE:
         required: true
