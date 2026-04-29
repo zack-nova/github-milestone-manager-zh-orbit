@@ -1,0 +1,4 @@
+interface:
+  display_name: "准备开发"
+  short_description: "为整个 milestone 准备开发上下文"
+  default_prompt: "使用 $prepare-development 为一个 GHPM milestone 同步 issues、准备 worktree 和开发交接上下文。"

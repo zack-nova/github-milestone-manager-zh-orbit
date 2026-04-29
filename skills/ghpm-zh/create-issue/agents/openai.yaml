@@ -1,0 +1,4 @@
+interface:
+  display_name: "创建 Issue"
+  short_description: "创建符合 GHPM 结构的 GitHub issue"
+  default_prompt: "使用 $create-issue 创建符合 GHPM 结构的新 GitHub issue。"
